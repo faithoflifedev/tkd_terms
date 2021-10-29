@@ -1,0 +1,82 @@
+#General Terms
+- { "english": "hello", "korean": "ahn-yong-hasae-yo" }
+- { "english": "thank you", "korean": "kam-sa-ham-nee-da" }
+- { "english": "attention", "korean": "cha-ryot" }
+- { "english": "bow", "korean": "kyung-ye" }
+- { "english": "ready", "korean": "joon-bi" }
+- { "english": "return to ready", "korean": "baro" }
+- { "english": "uniform", "korean": "dobock" }
+- { "english": "school", "korean": "dojang" }
+- { "english": "concentration", "korean": "jung-shin-tong-il" }
+- { "english": "pattern", "korean": "poomsae" }
+- { "english": "sparring", "korean": "hyourgi" }
+- { "english": "bow to the master", "korean": "sabum-nim-kae-kyung-nae" }
+- { "english": "flag", "korean": "kukki" }
+- { "english": "one step sparring", "korean": "han-bun-kyourgi" }
+- { "english": "basic", "korean": "kicho" }
+- { "english": "breaking", "korean": "kyuk-pa" }
+- { "english": "start", "korean": "she-jak" }
+- { "english": "finish", "korean": "keumahn" }
+
+#Five Tenets
+- { "english": "courtesy", "korean": "yeh-ee" }
+- { "english": "integrity", "korean": "yom-chi" }
+- { "english": "perseverance", "korean": "in-nae" }
+- { "english": "self control", "korean": "guk-ki" }
+- { "english": "indomitable spirit", "korean": "baekjul-boolgool" }
+
+#Counting Terms
+- { "english": "one", "korean": "hana" }
+- { "english": "two", "korean": "dool" }
+- { "english", "three", "korean": "seht" }
+- { "english": "four", "korean": "neht" }
+- { "english": "five", "korean": "dah-shut" }
+- { "english": "six", "korean": "yuh-shut" }
+- { "english": "seven", "korean": "eel-gob" }
+- { "english": "eight", "korean": "yeo-dool" }
+- { "english": "nine", "korean": "ah-hope" }
+- { "english": "ten", "korean": "yeol" }
+- { "english": "eleven", "korean": "yoll-han" }
+- { "english": "twelve", "korean": "yoll-dool" }
+- { "english": "thirteen", "korean": "yoll-seht" }
+- { "english": "fourteen", "korean": "yoll-neht" }
+- { "english": "fifteen", "korean": "yoll-dah-shut" }
+- { "english": "sixteen", "korean": "yoll-yeo-suht" }
+- { "english": "seventeen", "korean": "yoll-il-gob" }
+- { "english": "eighteen", "korean": "yoll-yeo-dool" }
+- { "english": "nineteen", "korean": "yoll-ah-hope" }
+- { "english": "twenty", "korean": "smool" }
+
+#Hand Techniques
+- { "english": "punch", "korean": "jilugi" }
+- { "english": "face punch", "korean": "olgool-jilugi" }
+- { "english": "middle punch", "korean": "momtong-jilugi" }
+
+#Stance
+- { "english": "stance", "korean": "seo-gi" }
+- { "english": "horse riding stance", "korean": "joo-choom-seo-gi" }
+- { "english": "walking stance", "korean": "ahp-seo-gi" }
+- { "english": "forward stance", "korean": "ahp-goop-bee" }
+- { "english": "back stance", "korean": "dweet-gu-bee" }
+
+#Blocking Techniques
+- { "english": "block", "korean": "makki" }
+- { "english": "low block", "korean": "ah-ray-makki" }
+- { "english": "middle block", "korean": "momtong-makki" }
+- { "english": "high block", "korean": "ol-gool-makki" }
+- { "english": "knife hand", "korean": "sonnal" }
+- { "english": "knife hand low block", "korean": "sonnal-ah-ray-makki" }
+- { "english": "knife hand middle block", "korean": "sonnal-momtong-makki" }
+
+#Kicking Techniques
+- { "english": "front kick", "korean": "ahp-cha-gi" }
+- { "english": "jump front kick", "korean": "twieo-ahp-cha-gi" }
+- { "english": "axe kick", "korean": "chi-guh-cha-gi" }
+- { "english": "round house kick", "korean": "dol-yeh-cha-gi" }
+- { "english": "tornado kick", "korean": "dol-geh-cha-gi" }
+- { "english": "spin hook kick", "korean": "dwit-dol-yeo-cha-gi" }
+- { "english": "jump back side kick", "korean": "twieo-dwit-cha-gi" }
+- { "english": "side kick", "korean": "yeop-cha-gi" }
+- { "english": "jump side kick", "korean": "twieo-ahp-cha-gi" }
+- { "english": "back kick", "korean": "dwit-cha-gi" }
+- { "english": "hook kick", "korean": "who-re-gee" }
