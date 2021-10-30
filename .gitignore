@@ -28,3 +28,6 @@ doc/api/
 **/.DS_Store
 .metadata
 .vscode/
+.firebase
+.firebaserc
+firebase.json

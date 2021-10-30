@@ -7,7 +7,9 @@ environment:
 
 dependencies:
   flip_card: ^0.6.0
+  flutter_animator: ^3.2.0
   get: ^4.3.8
+  percent_indicator: ^3.4.0
   pull_to_refresh: ^2.0.0
   yaml: ^3.1.0
 
