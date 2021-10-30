@@ -27,7 +27,11 @@ doc/api/
 #My customizations
 **/.DS_Store
 .metadata
+<<<<<<< HEAD
 .vscode/
 .firebase
 .firebaserc
 firebase.json
+=======
+.vscode/
+>>>>>>> efb549765460e62a7e78a5f008292c50ea671a89
