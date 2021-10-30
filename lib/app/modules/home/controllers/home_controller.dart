@@ -13,15 +13,11 @@ class HomeController extends GetxController {
 
   final score = Score(right: 0, wrong: 0, remaining: -1).obs;
 
-  var _hasData = false.obs;
+  final hasData = false.obs;
 
-  bool get hasData => _hasData();
+  final done = false.obs;
 
-  set hasData(bool value) {
-    _hasData.value = value;
-  }
-
-  var done = false.obs;
+  final showText = true.obs;
 
   @override
   void onInit() {
@@ -54,7 +50,7 @@ class HomeController extends GetxController {
       cardIndex.value++;
 
       if (cardIndex() == cards.length - 1) {
-        done.value = true;
+        done(true);
       }
     }
   }
@@ -62,11 +58,11 @@ class HomeController extends GetxController {
   void _getAllCards() async {
     final providedCards = await provider.getCards();
 
-    hasData = false;
+    hasData(false);
 
-    cardIndex.value = 0;
+    cardIndex(0);
 
-    done.value = false;
+    done(false);
 
     score.update((value) {
       if (value == null) return;
@@ -84,6 +80,6 @@ class HomeController extends GetxController {
 
     cards.add(Card(english: 'done!', korean: 'keumahn'));
 
-    hasData = true;
+    hasData(true);
   }
 }

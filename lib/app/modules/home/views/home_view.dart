@@ -50,20 +50,6 @@ class HomeView extends GetView<HomeController> {
                         Text('Progress: ' + _progress(),
                             style: TextStyle(
                                 fontSize: 30, fontWeight: FontWeight.bold)),
-                        // Row(
-                        //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        //     children: <Widget>[
-                        //       Text('Right: ${controller.score.value.right}',
-                        //           style: TextStyle(
-                        //               fontSize: 16, fontWeight: FontWeight.bold)),
-                        //       Text('Wrong: ${controller.score.value.wrong}',
-                        //           style: TextStyle(
-                        //               fontSize: 16, fontWeight: FontWeight.bold)),
-                        //       Text(
-                        //           'Remaining: ${controller.score.value.remaining}',
-                        //           style: TextStyle(
-                        //               fontSize: 16, fontWeight: FontWeight.bold))
-                        //     ]),
                         Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Container(
@@ -87,16 +73,14 @@ class HomeView extends GetView<HomeController> {
                             progressColor: Colors.green,
                             backgroundColor: Colors.red),
                         FlipCard(
-                          onFlip: () => controller.hasData = false,
-                          onFlipDone: (isFront) => controller.hasData = true,
+                          onFlip: () => controller.showText(false),
+                          onFlipDone: (isFront) => controller.showText(true),
                           key: cardKey,
                           fill: Fill
                               .fillBack, // Fill the back side of the card to make in the same size as the front.
                           direction: FlipDirection.HORIZONTAL, // default
-                          front: QuestionCard(
-                              controller: controller, isFront: true),
-                          back: QuestionCard(
-                              controller: controller, isFront: false),
+                          front: QuestionCard(isFront: true),
+                          back: QuestionCard(isFront: false),
                         ),
                         Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -163,11 +147,10 @@ class HomeView extends GetView<HomeController> {
   }
 }
 
-class QuestionCard extends StatelessWidget {
-  final HomeController controller;
+class QuestionCard extends GetView<HomeController> {
   final bool isFront;
 
-  QuestionCard({required this.controller, required this.isFront});
+  QuestionCard({required this.isFront});
 
   @override
   Widget build(BuildContext context) {
@@ -187,12 +170,11 @@ class QuestionCard extends StatelessWidget {
                           offset: new Offset(4.0, 4.0),
                         )
                       ]),
-                  // color: isFront ? Colors.green : Colors.blue,
                   width: 360.0,
                   height: 360.0,
-                  child: Align(
+                  child: Obx(() => Align(
                       alignment: Alignment.center,
-                      child: controller.hasData
+                      child: controller.showText.isTrue
                           ? Padding(
                               padding: const EdgeInsets.all(16.0),
                               child: Text(
@@ -204,7 +186,7 @@ class QuestionCard extends StatelessWidget {
                                       fontSize: 30,
                                       fontWeight: FontWeight.bold)),
                             )
-                          : CircularProgressIndicator())),
+                          : CircularProgressIndicator()))),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: RubberBand(
