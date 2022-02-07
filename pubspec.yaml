@@ -6,11 +6,13 @@ environment:
   sdk: ">=2.14.0 <3.0.0"
 
 dependencies:
+  circular_profile_avatar: ^2.0.5
   flip_card: ^0.6.0
   flutter_animator: ^3.2.0
   get: ^4.3.8
-  percent_indicator: ^3.4.0
+  percent_indicator: ^4.0.0
   pull_to_refresh: ^2.0.0
+  responsive_sizer: ^3.0.5+1
   yaml: ^3.1.0
 
   flutter:

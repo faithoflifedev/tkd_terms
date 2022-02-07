@@ -1,3 +1,4 @@
+import 'package:circular_profile_avatar/circular_profile_avatar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flip_card/flip_card.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_animator/flutter_animator.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -12,120 +14,142 @@ class HomeView extends GetView<HomeController> {
   final RefreshController _refreshController =
       RefreshController(initialRefresh: false);
 
-  final GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
+  final GlobalKey<FlipCardState> _cardKey = GlobalKey<FlipCardState>();
+
+  final GlobalKey<AnimatorWidgetState> frontAnimationKey =
+      GlobalKey<AnimatorWidgetState>();
+  final GlobalKey<AnimatorWidgetState> backAnimationKey =
+      GlobalKey<AnimatorWidgetState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Korean Terminology'),
-        centerTitle: true,
-      ),
-      body: SmartRefresher(
-          controller: _refreshController,
-          onRefresh: () async {
-            await controller.init();
+        appBar: AppBar(
+          title: Text('Tae Kwon Do Terminology'),
+          centerTitle: true,
+        ),
+        body: ResponsiveSizer(builder: (context, orientation, screenType) {
+          return SmartRefresher(
+              controller: _refreshController,
+              onRefresh: () async {
+                await controller.init();
 
-            _refreshController.loadComplete();
+                _refreshController.loadComplete();
 
-            _refreshController.refreshCompleted();
-          },
-          enablePullDown: true,
-          enablePullUp: false,
-          header: WaterDropHeader(),
-          child: SafeArea(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Obx(() {
-                final double grade = controller.score.value.right > 0
-                    ? controller.score.value.right /
-                        (controller.score.value.right +
-                            controller.score.value.wrong)
-                    : 0.0;
+                _refreshController.refreshCompleted();
+              },
+              enablePullDown: true,
+              enablePullUp: false,
+              header: WaterDropHeader(),
+              child: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Obx(() {
+                    final double grade = controller.score.value.right > 0
+                        ? controller.score.value.right /
+                            (controller.score.value.right +
+                                controller.score.value.wrong)
+                        : 0.0;
 
-                return SingleChildScrollView(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text('Progress: ' + _progress(),
-                            style: TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.bold)),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Container(
-                            width: 300.0,
-                            child: LinearPercentIndicator(
-                              width: 300.0,
-                              lineHeight: 14.0,
-                              percent: _linearPercent(),
-                              backgroundColor: Colors.grey,
-                              progressColor: Colors.blue,
-                            ),
-                          ),
-                        ),
-                        CircularPercentIndicator(
-                            radius: 75.0,
-                            lineWidth: 8.0,
-                            percent: grade,
-                            center: Text((grade * 100).round().toString() + '%',
+                    return SingleChildScrollView(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Text('Progress: ' + _progress(),
                                 style: TextStyle(
-                                    fontSize: 14, fontWeight: FontWeight.bold)),
-                            progressColor: Colors.green,
-                            backgroundColor: Colors.red),
-                        FlipCard(
-                          onFlip: () => controller.showText(false),
-                          onFlipDone: (isFront) => controller.showText(true),
-                          key: cardKey,
-                          fill: Fill
-                              .fillBack, // Fill the back side of the card to make in the same size as the front.
-                          direction: FlipDirection.HORIZONTAL, // default
-                          front: QuestionCard(isFront: true),
-                          back: QuestionCard(isFront: false),
-                        ),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: <Widget>[
-                              ElevatedButton(
-                                  onPressed: controller.done()
-                                      ? null
-                                      : () {
-                                          if (cardKey.currentState != null &&
-                                              !cardKey.currentState!.isFront)
-                                            cardKey.currentState!.toggleCard();
-                                          controller.next(isCorrect: true);
-                                        },
-                                  child: Icon(Icons.check),
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Colors.green,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 50, vertical: 20),
-                                      textStyle: TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold))),
-                              ElevatedButton(
-                                  onPressed: controller.done()
-                                      ? null
-                                      : () {
-                                          if (cardKey.currentState != null &&
-                                              !cardKey.currentState!.isFront)
-                                            cardKey.currentState!.toggleCard();
-                                          controller.next(isCorrect: false);
-                                        },
-                                  child: Icon(Icons.close_outlined),
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Colors.red,
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 50, vertical: 20),
-                                      textStyle: TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold))),
-                            ])
-                      ]),
-                );
-              }),
-            ),
-          )),
-    );
+                                    fontSize: 24.sp,
+                                    fontWeight: FontWeight.bold)),
+                            Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Container(
+                                width: 70.w,
+                                child: LinearPercentIndicator(
+                                  width: 70.w,
+                                  lineHeight: 2.5.h,
+                                  percent: _linearPercent(),
+                                  backgroundColor: Colors.grey,
+                                  progressColor: Colors.blue,
+                                ),
+                              ),
+                            ),
+                            CircularPercentIndicator(
+                                radius: 12.h,
+                                lineWidth: 1.25.h,
+                                percent: grade,
+                                center: Text(
+                                    (grade * 100).round().toString() + '%',
+                                    style: TextStyle(
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.bold)),
+                                progressColor: Colors.green,
+                                backgroundColor: Colors.red),
+                            FlipCard(
+                                onFlip: () => controller.showText(false),
+                                onFlipDone: (isFront) {
+                                  controller.showText(true);
+                                  isFront
+                                      ? backAnimationKey.currentState!.forward()
+                                      : frontAnimationKey.currentState!
+                                          .forward();
+                                },
+                                key: _cardKey,
+                                fill: Fill
+                                    .fillBack, // Fill the back side of the card to make in the same size as the front.
+                                direction: FlipDirection.HORIZONTAL, // default
+                                front: _getCard(true, frontAnimationKey),
+                                back: _getCard(false, backAnimationKey)),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  ElevatedButton(
+                                      onPressed: controller.done()
+                                          ? null
+                                          : () {
+                                              if (_cardKey.currentState !=
+                                                      null &&
+                                                  !_cardKey
+                                                      .currentState!.isFront)
+                                                _cardKey.currentState!
+                                                    .toggleCard();
+                                              controller.next(isCorrect: true);
+                                            },
+                                      child: Icon(Icons.check, size: 6.w),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.green,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 15.w, vertical: 4.h),
+                                      )),
+                                  Container(
+                                    width: 10.w,
+                                  ),
+                                  ElevatedButton(
+                                      onPressed: controller.done()
+                                          ? null
+                                          : () {
+                                              if (_cardKey.currentState !=
+                                                      null &&
+                                                  !_cardKey
+                                                      .currentState!.isFront) {
+                                                _cardKey.currentState!
+                                                    .toggleCard();
+                                              }
+
+                                              controller.next(isCorrect: false);
+                                            },
+                                      child:
+                                          Icon(Icons.close_outlined, size: 6.w),
+                                      style: ElevatedButton.styleFrom(
+                                        primary: Colors.red,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 15.w, vertical: 4.h),
+                                      )),
+                                ])
+                          ]),
+                    );
+                  }),
+                ),
+              ));
+        }));
   }
 
   double _linearPercent() {
@@ -145,15 +169,8 @@ class HomeView extends GetView<HomeController> {
 
     return '${index} / ${limit}';
   }
-}
 
-class QuestionCard extends GetView<HomeController> {
-  final bool isFront;
-
-  QuestionCard({required this.isFront});
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _getCard(bool isFront, GlobalKey<AnimatorWidgetState> animationKey) {
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -170,11 +187,12 @@ class QuestionCard extends GetView<HomeController> {
                           offset: new Offset(4.0, 4.0),
                         )
                       ]),
-                  width: 360.0,
-                  height: 360.0,
-                  child: Obx(() => Align(
+                  width: 85.w,
+                  height: 45.h,
+                  child: Align(
                       alignment: Alignment.center,
-                      child: controller.showText.isTrue
+                      child: controller.showText.isTrue &&
+                              controller.hasData.isTrue
                           ? Padding(
                               padding: const EdgeInsets.all(16.0),
                               child: Text(
@@ -183,21 +201,26 @@ class QuestionCard extends GetView<HomeController> {
                                       : '${controller.cards[controller.cardIndex()].korean}',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
-                                      fontSize: 30,
+                                      fontSize: 24.sp,
                                       fontWeight: FontWeight.bold)),
                             )
-                          : CircularProgressIndicator()))),
+                          : CircularProgressIndicator())),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: RubberBand(
+                  key: animationKey,
                   preferences: AnimationPreferences(
                       offset: Duration(seconds: 1),
-                      autoPlay: AnimationPlayStates.Loop),
-                  child: CircleAvatar(
+                      duration: Duration(seconds: 2),
+                      autoPlay: AnimationPlayStates.Forward),
+                  child: CircularProfileAvatar(
+                    '',
                     backgroundColor: isFront ? Colors.blue : Colors.green,
+                    radius: 3.5.h,
+                    elevation: 5.0,
                     child: Icon(
                       isFront ? Icons.redo : Icons.undo,
-                      size: 24,
+                      size: 3.h,
                       color: Colors.grey[300],
                     ),
                   ),
